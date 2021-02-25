@@ -1,5 +1,10 @@
 doctrine:
     dbal:
+        driver: 'pdo_pgsql'
+        charset: utf8
+        default_table_options:
+            charset: utf8
+            collate: utf8_unicode_ci
         url: '%env(resolve:DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,
