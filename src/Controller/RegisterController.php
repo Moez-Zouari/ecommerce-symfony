@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegisterController extends AbstractController
 {
@@ -24,7 +25,7 @@ class RegisterController extends AbstractController
 
     /* Injection de depandance request, dire a symfony je veux que tu rentres
     dans ma fonction public index en embarquon avec toi l'objet request  */
-    public function index(Request $request): Response
+    public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User(); //Instancier mon user
         $form = $this->createForm(RegisterType::class, $user); //Instacier mon formulaire
@@ -39,6 +40,12 @@ class RegisterController extends AbstractController
 
             //Injecter dans l'objet user toutes les donnés recupérés depuis le formulare
             $user = $form->getData();
+
+            //Pour encoder le mot de passe
+            $password = $encoder->encodePassword($user, $user->getPassword());
+            // Pour sauvegarder le mot de passe encoder dans la bd 
+            $user->setPassword($password);
+
 
             //Percister c'est a dire fije la data parceque j'ai besoin de l'enregistrer
             $this->entityManager->persist($user);
