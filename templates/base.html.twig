@@ -43,11 +43,12 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Votre recherche" aria-label="Votre recherche">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-            </form>
-        </div>
+            {% if app.user %}
+           <a href="{{path('account')}}"> Mon Compte </a> | <a href="{{path('app_logout')}}"> Deconnexion</a>
+            {% else %}
+           <a href="{{path('app_login')}}"> Connexion  </a> | <a href="{{path('register')}}"> Inscription</a>
+            {% endif %}
+         </div>
     </nav>
 </header>
 
