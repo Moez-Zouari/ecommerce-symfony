@@ -34,6 +34,13 @@ class Category
         $this->products = new ArrayCollection();
     }
 
+    /**
+     * Pour Resoudre le probleme could not be converted to string dans EasyAdmin
+     */
+    public function __toString() {
+        return $this->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
