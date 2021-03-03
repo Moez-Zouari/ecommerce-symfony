@@ -48,13 +48,12 @@ class AccountPasswordController extends AbstractController
                 //Setter le nouveau psw dans l'objet User
                 $user->setPassword($password);
 
-              
+
                 /*  flush tu executes la persistance, tu prends la data l'objet que tu l'a fijer
                 et tu l'enregistres dans la BD */
                 $this->entityManager->flush();
 
                 $notification = "Votre mot de passe a bien été mis à jour";
-
             } else {
                 $notification = "Votre mot de passe actuel n'est pas le bon";
             }

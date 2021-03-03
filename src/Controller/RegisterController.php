@@ -22,7 +22,7 @@ class RegisterController extends AbstractController
 
 
     #[Route('/inscription', name: 'register')]
-
+    
     /* Injection de depandance request, dire a symfony je veux que tu rentres
     dans ma fonction public index en embarquon avec toi l'objet request  */
     public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
@@ -43,12 +43,13 @@ class RegisterController extends AbstractController
 
             //Pour encoder le mot de passe
             $password = $encoder->encodePassword($user, $user->getPassword());
+
             // Pour sauvegarder le mot de passe encoder dans la bd 
             $user->setPassword($password);
 
-
             //Percister c'est a dire fije la data parceque j'ai besoin de l'enregistrer
             $this->entityManager->persist($user);
+
             /*  flush tu executes la persistance, tu prends la data l'objet que tu l'a fijer
             et tu l'enregistre dans la BD */
             $this->entityManager->flush();
