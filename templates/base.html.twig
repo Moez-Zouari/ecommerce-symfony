@@ -12,7 +12,7 @@
 		</title>
 
 		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" >
+		<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/feelcrafts.css') }}">
 		<style>
 			.bd-placeholder-img {
@@ -56,7 +56,8 @@
 					<div class="navbar-item-custom">
 						{% if app.user %}
 							<a href="{{path('account')}}">
-								Mon Compte <small>({{app.user.firstname}})</small>
+								Mon Compte
+								<small>({{app.user.firstname}})</small>
 							</a>
 							|
 							<a href="{{path('app_logout')}}">
@@ -70,7 +71,7 @@
 								Inscription</a>
 						{% endif %}
 					</div>
-
+					<img src="{{ asset('assets/img/shopping-cart.png') }}" class="cart-icon" alt="Mon panier">
 				</div>
 			</nav>
 		</header>
@@ -135,7 +136,7 @@
 			{% endif %}
 
 			<!-- Marketing messaging and featurettes
-			    ================================================== -->
+						    ================================================== -->
 			<!-- Wrap the rest of the page in another container to center all the content. -->
 
 			{# Ajouter un petit margin pour la page d'inscription lorsque le block carousel n'est pas present #}
@@ -144,11 +145,15 @@
 
 				<!-- FOOTER -->
 				<footer class="footer-custom">
-				
+
 					<p>
-                    &copy; 2021 Feelcrafts <br> 
-                    <small>La boutique 100% made in Tunisia<br>
-						<a href="#">Privacy</a> ' <a href="#">Terms</a></small>
+						&copy; 2021 Feelcrafts
+						<br>
+						<small>La boutique 100% made in Tunisia<br>
+							<a href="#">Privacy</a>
+							'
+							<a href="#">Terms</a>
+						</small>
 					</p>
 				</footer>
 			</main>

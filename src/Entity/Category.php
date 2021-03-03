@@ -37,7 +37,8 @@ class Category
     /**
      * Pour Resoudre le probleme could not be converted to string dans EasyAdmin
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getName();
     }
 
