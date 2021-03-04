@@ -60,6 +60,13 @@ class Carrier
 
         return $this;
     }
+      /**
+     * Pour Resoudre le probleme could not be converted to string dans EasyAdmin
+     */
+    public function __toString()
+    {
+        return $this->getName().'[br]'.$this->getDescription().'[br]'.number_format($this->getPrice(),2,',','.').' €';
+    }
 
     public function getPrice(): ?float
     {
