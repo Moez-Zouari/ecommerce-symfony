@@ -121,6 +121,14 @@ class Address
         return $this;
     }
 
+     /**
+     * Pour Resoudre le probleme could not be converted to string dans EasyAdmin
+     */
+    public function __toString()
+    {
+        return $this->getName().'[br]'.$this->getAddress().'[br]'.$this->getCity().' - '.$this->getCountry();
+    }
+    
     public function getCompany(): ?string
     {
         return $this->company;
