@@ -35,8 +35,8 @@ class OrderController extends AbstractController
         $form = $this->createForm(OrderType::class, null, [
             'user' => $this->getUser()
         ]);
-        
-    
+
+
 
         return $this->render('order/index.html.twig', [
             'form' => $form->createView(),
@@ -49,71 +49,68 @@ class OrderController extends AbstractController
 
 
     /**
-    * @Route("/commande/recapitulatif", name="order_recap", methods={"POST"})
-    */
-    
+     * @Route("/commande/recapitulatif", name="order_recap", methods={"POST"})
+     */
+
     public function add(Cart $cart, Request $request): Response
     {
-       
+
 
         $form = $this->createForm(OrderType::class, null, [
             'user' => $this->getUser()
         ]);
-        
+
         $form->handleRequest($request);
 
-        if ( $form->isSubmitted() && $form->isValid() )
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $date = new DateTime();
             $carriers = $form->get('carriers')->getData();
             $delivery = $form->get('addresses')->getData();
-            $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
-            $delivery_content .= '<br/>'.$delivery->getPhone();
+            $delivery_content = $delivery->getFirstname() . ' ' . $delivery->getLastname();
+            $delivery_content .= '<br/>' . $delivery->getPhone();
 
-            if($delivery->getCompany())
-            {
-                $delivery_content .= '<br/>'.$delivery->getCompany();
+            if ($delivery->getCompany()) {
+                $delivery_content .= '<br/>' . $delivery->getCompany();
             }
-           
-            $delivery_content .= '<br/>'.$delivery->getAddress();
-            $delivery_content .= '<br/>'.$delivery->getPostal().' - ' .$delivery->getCity();
-            $delivery_content .= ' - '.$delivery->getCountry();
-            
-            // Enregistrer ma commande Order()
-           $order = new Order();
-           $order->setUsero($this->getUser());
-           $order->setCreatedAt($date);
-           $order->setCarrierName($carriers->getName());
-           $order->setCarrierPrice($carriers->getPrice());
-           $order->setDelivery($delivery_content);
-           $order->setIsPaid(0);
 
-           $this->entityManager->persist($order);
+            $delivery_content .= '<br/>' . $delivery->getAddress();
+            $delivery_content .= '<br/>' . $delivery->getPostal() . ' - ' . $delivery->getCity();
+            $delivery_content .= ' - ' . $delivery->getCountry();
+
+            // Enregistrer ma commande Order()
+            $order = new Order();
+            $order->setUsero($this->getUser());
+            $order->setCreatedAt($date);
+            $order->setCarrierName($carriers->getName());
+            $order->setCarrierPrice($carriers->getPrice());
+            $order->setDelivery($delivery_content);
+            $order->setIsPaid(0);
+
+            $this->entityManager->persist($order);
 
             // Enregistrer mes produits OrderDetails()
-          
-           foreach($cart->getFull() as $product)
-           {
-            $orderDetails = new OrderDetails();
-            $orderDetails->setOrderd($order);
-            $orderDetails->setProduct($product['product']->getName());
-            $orderDetails->setQuantity($product['quantity']);
-            $orderDetails->setPrice($product['product']->getPrice());
-            $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
-            $this->entityManager->persist($orderDetails);
-           }
 
-           $this->entityManager->flush();
-          
-        
+            foreach ($cart->getFull() as $product) {
+                $orderDetails = new OrderDetails();
+                $orderDetails->setOrderd($order);
+                $orderDetails->setProduct($product['product']->getName());
+                $orderDetails->setQuantity($product['quantity']);
+                $orderDetails->setPrice($product['product']->getPrice());
+                $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
+                $this->entityManager->persist($orderDetails);
+            }
 
-        return $this->render('order/add.html.twig', [
-            'cart' => $cart->getFull(),
-            'carrier' =>  $carriers,
-            'delivery' => $delivery_content
-        ]);
-    }
+            $this->entityManager->flush();
 
-    return $this->redirectToRoute('cart');
+
+
+            return $this->render('order/add.html.twig', [
+                'cart' => $cart->getFull(),
+                'carrier' =>  $carriers,
+                'delivery' => $delivery_content
+            ]);
+        }
+
+        return $this->redirectToRoute('cart');
     }
 }

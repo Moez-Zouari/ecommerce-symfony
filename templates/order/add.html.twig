@@ -60,8 +60,4 @@
 <strong>Livraison :
 </strong>
 {{ carrier.price | number_format(2,',','.') }}
-€</br><hr><strong>Total :</strong>{{  ((total / 100) + carrier.price) | number_format(2,',','.') }}€</br>
-<a href="" class="btn btn-success btn-block mt-3">Payer | {{  ((total / 100) + carrier.price) | number_format(2,',','.') }} €</a>
-</div>
-</div>
-{% endblock %}
+€</br><hr><strong>Total :</strong>{{  ((total / 100) + carrier.price) | number_format(2,',','.') }}€</br><a href="" class="btn btn-success btn-block mt-3">Payer |{{  ((total / 100) + carrier.price) | number_format(2,',','.') }}€</a></div></div>{% endblock %}
