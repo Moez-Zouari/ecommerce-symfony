@@ -30,8 +30,6 @@ class StripeController extends AbstractController
             new JsonResponse(['error' => 'order']);
         }
 
-
-
         /* 
         Ici on va rechercher dans le panier dans la session tous les produits pour
         les envoyés a Stripe
@@ -54,11 +52,15 @@ class StripeController extends AbstractController
             ];
         }
 
+         /* 
+        Ici on va rechercher le carrier choisis et recupérer ses information et le mettre dans 
+        notre strip pour l'afficher
+        */
         $product_for_stripe[] = [
 
             'price_data' => [
                 'currency' => 'eur',
-                'unit_amount' => $order->getCarrierPrice() * 100,
+                'unit_amount' => $order->getCarrierPrice(),
                 'product_data' => [
                     'name' => $order->getCarrierName(),
                     'images' => [$YOUR_DOMAIN],
@@ -79,9 +81,12 @@ class StripeController extends AbstractController
                 $product_for_stripe
             ],
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/success.html',
-            'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+            'success_url' => $YOUR_DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
+            'cancel_url' => $YOUR_DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
         ]);
+
+        $order->setStripeSessionId($checkout_session->id);
+        $entityManager->flush();
 
         $response = new JsonResponse(['id' => $checkout_session->id]);
         return $response;

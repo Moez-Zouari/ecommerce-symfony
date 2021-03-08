@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement - Feelcrafts{% endblock %}
+
+{% block content %}
+    <h2>Erreur de paiement</h2>
+    <p>
+        Bonjour <strong>{{ order.usero.firstname }} {{ order.usero.lastname }}</strong>, <br/><br/>
+        Il semblerait que votre paiement est echoué pour votre commande n° <strong>{{ order.reference}}</strong>. </br>
+        Une confirmation d'erreur vient de vous étre envoyée par mail à l'adresse <strong>{{order.usero.email}}</strong>
+        <hr>
+        <a href="{{ path('order') }}"  class="btn btn-success"> Réssayer le paiement</a>
+    </p>
+{% endblock %}
