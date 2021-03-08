@@ -70,7 +70,7 @@ class Cart
     public function getFull()
     {
         /* 
-        A chaque produit je voudrais enrichir c e carte complete de data de nos produit
+        A chaque produit je voudrais enrichir ce carte complete de data de nos produit
         que doctrine va nous chercher dans la bd
         */
         $cartComplete = [];
