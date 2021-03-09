@@ -54,7 +54,7 @@ class OrderController extends AbstractController
 
 
     /**
-     * @Route("/commande/recapitulatif", name="order_recap", methods={"POST"})
+     * @Route("/commande/recapitulatif", name="order_recap")
      */
 
     public function add(Cart $cart, Request $request): Response
@@ -91,7 +91,7 @@ class OrderController extends AbstractController
             $order->setCarrierName($carriers->getName());
             $order->setCarrierPrice($carriers->getPrice());
             $order->setDelivery($delivery_content);
-            $order->setIsPaid(0);
+            $order->setState(0);
 
             $this->entityManager->persist($order);
 
