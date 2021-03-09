@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Entity\Address;
 use App\Entity\Order;
 use App\Entity\OrderDetails;
+use App\Entity\User;
 use App\Form\OrderType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,14 +28,15 @@ class OrderController extends AbstractController
     }
 
     #[Route('/commande', name: 'order')]
-    public function index(Cart $cart, Request $request): Response
+    public function index(Cart $cart): Response
     {
+     
         if (!$this->getUser()->getAddresses()->getValues()) {
             return $this->redirectToRoute('account_address_add');
         }
 
         $form = $this->createForm(OrderType::class, null, [
-            'user' => $this->getUser()
+            'user' => ($this->getUser())
         ]);
 
 
@@ -43,6 +46,8 @@ class OrderController extends AbstractController
             'cart' => $cart->getFull()
 
         ]);
+
+      
     }
 
 

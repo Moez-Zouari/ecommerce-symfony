@@ -72,9 +72,13 @@ class RegisterType extends AbstractType
 
             ])
 
-            ->add('submit', SubmitType::class, [
-                'label' => "S'inscrire"
-            ]);
+              ->add('submit', SubmitType::class, [
+                'label' => "S'inscrire",
+                'attr' => [
+                    'class' => 'btn btn-lg btn-info btn-block mt-3'
+                ]
+                
+            ]);  
     }
 
     public function configureOptions(OptionsResolver $resolver)
