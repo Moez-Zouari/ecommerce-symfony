@@ -56,13 +56,15 @@ class ProductController extends AbstractController
     {
         //Recupérer le repos et aprés j'utilise findOneBy et  j'injecte le slug
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
+        $products = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
 
         if (!$product) {
             return $this->redirectToRoute('products');
         }
 
         return $this->render('product/show.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'products' => $products
         ]);
     }
 }

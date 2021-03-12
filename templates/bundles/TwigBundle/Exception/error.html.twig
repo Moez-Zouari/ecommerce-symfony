@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable - Feelcrafts
+{% endblock %}
+
+{% block content %}
+	<div class="block-small">
+		<h2>Page introuvable</h2>
+        <p>Désolé, cette ppage ne semble pas étre accessible pour le moment.</p>
+        <a href="{{ path('home')}}" class="btn btn-info">Revenir à l'accueil</a>
+	</div>
+
+{% endblock %}
