@@ -221,6 +221,8 @@ class User implements UserInterface
         return $this;
     }
 
+ 
+
     public function removeOrder(Order $order): self
     {
         if ($this->orders->removeElement($order)) {
