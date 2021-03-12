@@ -86,3 +86,21 @@ body {
 .action-updatePreparation{
   margin-right: 22px;
 }
+
+.account-item{
+  background-color: #f1f2f6;
+  padding: 70px
+}
+
+.account-item a {
+ text-transform: uppercase;
+ font-size: 13px;
+ color : #4b6584;
+ font-weight: bold;
+}
+
+.account-item a:hover {
+  color : #5b7ea3;
+  text-decoration: none;
+  
+ }
