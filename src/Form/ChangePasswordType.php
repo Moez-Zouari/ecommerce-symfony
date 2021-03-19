@@ -45,7 +45,8 @@ class ChangePasswordType extends AbstractType
             avoir exactement le meme  contenu */
             ->add('new_password', RepeatedType::class, [
                 'type' => PasswordType::class,
-             /*  Mapped false :Pour indiquer a symfony que la propreité 
+                
+            /*  Mapped false :Pour indiquer a symfony que la propreité 
             que je te demande d'ajouter ici dans le formulaire
             tu ne dois pas l'a liée à mon entité car dans mon entité
             elle n'existe pas */

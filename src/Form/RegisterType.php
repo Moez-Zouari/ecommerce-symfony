@@ -22,8 +22,8 @@ class RegisterType extends AbstractType
             ->add('firstname', TextType::class, [
                 'label' => 'Votre prénom',
                 'constraints' => new Length([
-                    'min' =>2,
-                    'max' =>30
+                    'min' => 2,
+                    'max' => 30
                 ]),
                 'attr' => [
                     'placeholder' => 'Merci de saisir votre prénom'
@@ -32,8 +32,8 @@ class RegisterType extends AbstractType
             ->add('lastname', TextType::class, [
                 'label' => 'Votre nom',
                 'constraints' => new Length([
-                    'min' =>2,
-                    'max' =>30
+                    'min' => 2,
+                    'max' => 30
                 ]),
                 'attr' => [
                     'placeholder' => 'Merci de saisir votre nom'
@@ -42,14 +42,14 @@ class RegisterType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
                 'constraints' => new Length([
-                    'min' =>2,
-                    'max' =>60
+                    'min' => 2,
+                    'max' => 60
                 ]),
                 'attr' => [
                     'placeholder' => 'Merci de saisir votre email'
                 ]
             ])
-           /* Repeated Type : Qui nous permet de dire au symfony j'ai besoin
+            /* Repeated Type : Qui nous permet de dire au symfony j'ai besoin
             de meme proprieté de generer 2 champs differents qui doivent
             avoir exactement le meme  contenu */
             ->add('password', RepeatedType::class, [
@@ -57,22 +57,28 @@ class RegisterType extends AbstractType
                 'invalid_message' => 'Le mot de passe et la confirmation doivent étre identique',
                 'label' => 'Votre mot de passe',
                 'required' => true,
-                'first_options' => ['label' => 'Mot de passe',
-                'attr' => [
-                    'placeholder' => 'Merci de saisir votre mot de passe'
-                ]
+                'first_options' => [
+                    'label' => 'Mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Merci de saisir votre mot de passe'
+                    ]
                 ],
-                'second_options' => ['label' => 'Confirmez votre mot de passe',
-                'attr' => [
-                    'placeholder' => 'Merci de confirmer votre mot de passe'
-                ]
+                'second_options' => [
+                    'label' => 'Confirmez votre mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Merci de confirmer votre mot de passe'
+                    ]
                 ],
-                
+
             ])
 
-            ->add('submit', SubmitType::class, [
-                'label' => "S'inscrire"
-            ]);
+              ->add('submit', SubmitType::class, [
+                'label' => "S'inscrire",
+                'attr' => [
+                    'class' => 'btn btn-lg btn-info btn-block mt-3'
+                ]
+                
+            ]);  
     }
 
     public function configureOptions(OptionsResolver $resolver)
